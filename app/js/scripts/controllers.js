@@ -58,13 +58,13 @@ angular.module('productsApp', ['ngRoute']);
                 });
 
             $scope.firstPage = function() {
-                return $scope.currentPage == 0;
+                return $scope.currentPage <= 0;
             };
             $scope.lastPage = function() {
                 let inputValue = angular.element(document.querySelector (".search__input")).val();
                 let lastPageNum;
                 if (inputValue != undefined && inputValue != "" ) {
-                    lastPageNum = Math.ceil($scope.searchText.length / $scope.itemsPerPage - 1);
+                    lastPageNum = Math.ceil($scope.fliteredData.length / $scope.itemsPerPage - 1);
                 } else {
                     lastPageNum = Math.ceil($scope.items.length / $scope.itemsPerPage - 1);
                 }
@@ -75,7 +75,15 @@ angular.module('productsApp', ['ngRoute']);
             $scope.numberOfPages = function(){
                 let inputValue = angular.element(document.querySelector (".search__input")).val();
                 if (inputValue != undefined && inputValue != "") {
-                     return Math.ceil($scope.searchText.length / $scope.itemsPerPage);
+
+                    if ($scope.fliteredData.length==0) {
+                        $scope.currentPage = -1;
+                        return 0;
+                    }
+                    else {
+                        $scope.currentPage = 0;
+                    }
+                     return Math.ceil($scope.fliteredData.length / $scope.itemsPerPage);
                 } else {
                     return Math.ceil($scope.items.length / $scope.itemsPerPage);
                 }

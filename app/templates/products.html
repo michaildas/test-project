@@ -4,7 +4,7 @@
                 <th class="content-table__heading" ng-click = "order(key,value)"
                     ng-repeat="(key,value) in tableStructure">{{value}}</th>
             </tr>
-            <tr ng-repeat="item in items | filter: searchText|startFrom: startingItem() | limitTo: itemsPerPage">
+            <tr ng-repeat="item in items | filter: searchText|startFrom: startingItem()| limitTo: itemsPerPage as fliteredData">
                 <td ng-repeat="prop in item">{{prop}}</td>
             </tr>
         </table>
@@ -17,5 +17,6 @@
 <section class="col-xs-3 search">
     <label>Search: <input class="search__input" ng-model="searchText"></label>
 </section>
+
 
 
