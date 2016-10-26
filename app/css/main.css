@@ -1,0 +1,38 @@
+.title-container {
+  margin: auto;
+  text-align: center; }
+
+.header__title {
+  display: inline-block;
+  border: 1px solid grey;
+  padding: 1% 8%;
+  margin-bottom: 40px;
+  font-size: 35px; }
+
+.content-table, .content-table__heading {
+  text-align: center;
+}
+
+.content-table__heading:hover {
+  cursor: pointer;
+}
+
+.content-table__heading:active {
+  transform: scale(1.2, 1.2);
+}
+
+.content-pagination {
+  text-align: center;
+}
+
+.content-pagination__text {
+  font-weight: bold;
+  padding: 0 1%;
+}
+
+.search {
+  padding-top: 6px;
+}
+.search__input {
+  font-weight: normal;
+}

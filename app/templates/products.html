@@ -1,0 +1,21 @@
+<section class="col-xs-9 content">
+        <table class="content-table table table-bordered">
+            <tr class="content-table__headings" >
+                <th class="content-table__heading" ng-click = "order(key,value)"
+                    ng-repeat="(key,value) in tableStructure">{{value}}</th>
+            </tr>
+            <tr ng-repeat="item in items | filter: searchText|startFrom: startingItem() | limitTo: itemsPerPage">
+                <td ng-repeat="prop in item">{{prop}}</td>
+            </tr>
+        </table>
+        <div class="content-pagination">
+            <button class="btn btn-primary btn-sm" ng-disabled="firstPage()" ng-click="pageBack()">Назад</button>
+            <span class="content-pagination__text">{{currentPage+1}} из {{numberOfPages()}}</span>
+            <button class="btn btn-primary btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Вперед</button>
+        </div>
+</section>
+<section class="col-xs-3 search">
+    <label>Search: <input class="search__input" ng-model="searchText"></label>
+</section>
+
+
