@@ -6,7 +6,7 @@
                     <span class="sortorder" ng-show="propertyName == key" ng-class="{reverse: reverse}"></span>
                 </th>
             </tr>
-            <tr ng-repeat="item in items |filter: searchText|startFrom: startingItem()
+            <tr ng-repeat="item in items |filter: searchText|startFrom: currentPage * itemsPerPage
             | limitTo: itemsPerPage| orderBy:property:reverse as fliteredData">
                 <td ng-repeat="prop in item">{{prop}}</td>
             </tr>
@@ -14,9 +14,10 @@
         <div class="content-pagination">
             <button class="btn btn-primary btn-sm" ng-disabled="firstPage()" ng-click="pageBack()">Назад</button>
             <span class="content-pagination__text">{{currentPage+1}} из {{numberOfPages()}}</span>
-            <button class="btn btn-primary btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Вперед</button>
-        </div>
+<button class="btn btn-primary btn-sm" ng-disabled="lastPage()" ng-click="pageForward()">Вперед</button>
+</div>
 </section>
 <section class="col-xs-3 search">
     <label>Search: <input class="search__input" ng-model="searchText"></label>
 </section>
+

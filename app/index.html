@@ -11,19 +11,16 @@
     <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 
-
-    <script src="js/vendor/angular.js"></script>
-    <script src="js/main.js"></script>
-
 </head>
 <body ng-app="productsApp">
 
-<main role="main" class="container">
+<main role="main" class="container" ng-controller="tableController">
     <div class="row">
-        <my-table></my-table>
+        <!--<my-table tableData="tableData" tableStructure="tableStructure"></my-table>-->
     </div>
 </main>
 
-
+<script src="js/vendor/angular.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

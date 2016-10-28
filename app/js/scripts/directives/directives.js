@@ -1,33 +1,27 @@
 app.directive("myTable", [
-    "$http",
-    function ($http) {
+    function () {
     return {
         restrict: "E",
         templateUrl: "/templates/my-table.html",
+        scope: {
+            tableData: "=",
+            tableStructure: "="
+        },
         link: function(scope) {
+            console.log(scope.tableData);
             scope.currentPage = 0;
-            scope.itemsPerPage = 50;
-            scope.items = [];
-            scope.tableData = {};
-            scope.tableStructureKeys = [];
-            scope.propertyName = null;
+            scope.itemsPerPage = 15;
+            scope.items = scope.tableData;
+            scope.propertyName = "id";
             scope.property = "0";
             scope.reverse = true;
-
+            scope.structureKeys = Object.keys(scope.tableData);
             scope.sortBy = function(property) {
                 scope.propertyName = scope.tableStructureKeys[property];
                 property = property.toString();
                 scope.reverse = (scope.property === property) ? !scope.reverse : false;
                 scope.property = property;
             };
-
-            $http.get('../../products.json')
-                .success(function (data) {
-                    scope.items = data;
-                    scope.tableData = scope.items.splice(0,1)[0];
-                    scope.tableStructureKeys = Object.keys(scope.tableData);
-                    scope.propertyName = scope.tableStructureKeys[0];
-                });
 
             scope.firstPage = function() {
                 return scope.currentPage <= 0;
@@ -45,8 +39,7 @@ app.directive("myTable", [
             };
 
             scope.numberOfPages = function(){
-                let inputValue = angular.element(document.querySelector (".search__input")).val();
-                if (inputValue != undefined && inputValue != "") {
+                if (scope.searchText != undefined && scope.searchText != "") {
 
                     if (scope.fliteredData.length==0) {
                         scope.currentPage = -1;
