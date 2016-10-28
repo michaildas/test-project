@@ -1,55 +1,39 @@
-"use strict";
+'use strict';
 
 var app = angular.module('productsApp', []);
+app.filter('startFrom', function () {
+    return function (input, start) {
+        start = +start;
+        return input.slice(start);
+    };
+});
 
 app.directive("myTable", ["$http", function ($http) {
     return {
         restrict: "E",
-        templateUrl: "/templates/my-table/index.html",
+        templateUrl: "/templates/my-table.html",
         link: function link(scope) {
             scope.currentPage = 0;
             scope.itemsPerPage = 50;
-            scope.orderKey = undefined;
-            scope.orderKeyNum = -1;
             scope.items = [];
-            scope.tableStructure = {};
+            scope.tableData = {};
             scope.tableStructureKeys = [];
-
             scope.propertyName = null;
+            scope.property = "0";
             scope.reverse = true;
 
-            function sort(a, b) {
-                if (a[scope.orderKeyNum] > b[scope.orderKeyNum]) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            }
-
-            scope.sortBy = function (key) {
-                if (scope.orderKey == key) {
-                    scope.items.reverse();
-                } else {
-                    scope.orderKey = key;
-                    for (var i = 0; i < scope.tableStructureKeys.length; i++) {
-                        if (scope.tableStructureKeys[i] == key) {
-                            scope.orderKeyNum = i;
-                            break;
-                        }
-                    }
-                    scope.items.sort(sort);
-                }
+            scope.sortBy = function (property) {
+                scope.propertyName = scope.tableStructureKeys[property];
+                property = property.toString();
+                scope.reverse = scope.property === property ? !scope.reverse : false;
+                scope.property = property;
             };
-
-            /*scope.sortBy = function(propertyName) {
-                scope.reverse = (scope.propertyName === propertyName) ? !scope.reverse : false;
-                scope.propertyName = propertyName;
-            };*/
 
             $http.get('../../products.json').success(function (data) {
                 scope.items = data;
-                scope.tableStructure = scope.items.splice(0, 1)[0];
-                scope.tableStructureKeys = Object.keys(scope.tableStructure);
+                scope.tableData = scope.items.splice(0, 1)[0];
+                scope.tableStructureKeys = Object.keys(scope.tableData);
+                scope.propertyName = scope.tableStructureKeys[0];
             });
 
             scope.firstPage = function () {
@@ -95,9 +79,3 @@ app.directive("myTable", ["$http", function ($http) {
         }
     };
 }]);
-app.filter('startFrom', function () {
-    return function (input, start) {
-        start = +start;
-        return input.slice(start);
-    };
-});

@@ -1,10 +1,13 @@
 <section class="col-xs-9 content">
         <table class="content-table table table-bordered">
             <tr class="content-table__headings" >
-                <th class="content-table__heading" ng-click = "sortBy(key)"
-                    ng-repeat="(key,value) in tableStructure">{{value}}</th>
+                <th class="content-table__heading" ng-repeat="(key,value) in tableData"
+                ng-click="sortBy($index)">{{value}}
+                    <span class="sortorder" ng-show="propertyName == key" ng-class="{reverse: reverse}"></span>
+                </th>
             </tr>
-            <tr ng-repeat="item in items | filter: searchText|startFrom: startingItem()| limitTo: itemsPerPage as fliteredData">
+            <tr ng-repeat="item in items |filter: searchText|startFrom: startingItem()
+            | limitTo: itemsPerPage| orderBy:property:reverse as fliteredData">
                 <td ng-repeat="prop in item">{{prop}}</td>
             </tr>
         </table>
@@ -17,9 +20,3 @@
 <section class="col-xs-3 search">
     <label>Search: <input class="search__input" ng-model="searchText"></label>
 </section>
-
-
-
-<!--
-filter: searchText|startFrom: startingItem()| limitTo: itemsPerPage-->
-<!--|orderBy:propertyName:reverse |-->
