@@ -14,39 +14,14 @@
 </head>
 <body>
 
-<header class="container header">
-    <div class="row">
-        <nav class="navbar navbar-inverse" ng-controller="NavigationController as navCtrl">
-            <ul class="nav navbar-nav">
-                <li ng-class="{active: isSelected(1)}">
-                    <a href="/#/products" ng-click="selectTab(1)">Products</a>
-                </li>
-                <li ng-class="{active: isSelected(2)}">
-                    <a href="/#/demo" ng-click="selectTab(2)">Demo</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class="row">
-        <div class="title-container">
-            <h1 class="header__title">Test-project</h1>
-        </div>
-    </div>
-</header>
-
-
 <main role="main" class="container">
     <div class="row">
-        <div ng-view></div>
+        <my-table></my-table>
     </div>
 </main>
 
-
-<script src="js/vendor/jquery.min.js"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/vendor/angular.js"></script>
-<script src="js/vendor/angular-route.js"></script>
-
 <script src="js/main.js"></script>
+
 </body>
 </html>

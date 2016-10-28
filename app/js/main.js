@@ -1,20 +1,9 @@
 'use strict';
 
-angular.module('productsApp', ['ngRoute']);
+angular.module('productsApp');
 
 (function () {
-    angular.module('productsApp').controller('NavigationController', ["$scope", function ($scope) {
-        $scope.tab = 1;
-
-        $scope.selectTab = function (setTab) {
-            $scope.tab = setTab;
-        };
-
-        $scope.isSelected = function (checkTab) {
-            return $scope.tab === checkTab;
-        };
-    }]).controller('ProductsController', ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
-        //pagination
+    angular.module('productsApp').controller('ProductsController', ["$scope", "$http", function ($scope, $http) {
         $scope.currentPage = 0;
         $scope.itemsPerPage = 50;
         $scope.orderKey = undefined;
@@ -99,30 +88,12 @@ angular.module('productsApp', ['ngRoute']);
     });
 })();
 (function () {
-    angular.module('productsApp').directive("products", function () {
+    angular.module('productsApp').directive("myTable", function () {
         return {
             restrict: "E",
-            templateUrl: "/templates/products.html",
+            templateUrl: "/templates/my-table/index.html",
             controller: "ProductsController",
             controllerAs: "productsCtrl"
         };
-    }).directive("demo", function () {
-        return {
-            restrict: "E",
-            templateUrl: "/templates/demo.html",
-            controller: "ProductsController",
-            controllerAs: "productsCtrl"
-        };
-    });
-})();
-(function () {
-    angular.module('productsApp').config(function ($routeProvider) {
-        $routeProvider.when('/', {
-            templateUrl: '/pages/products/index.html'
-        }).when('/products', {
-            templateUrl: '/pages/products/index.html'
-        }).when('/demo', {
-            templateUrl: '/pages/demo/index.html'
-        }).otherwise({ redirectTo: "/" });
     });
 })();

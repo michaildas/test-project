@@ -1,22 +1,10 @@
 'use strict';
-angular.module('productsApp', ['ngRoute']);
+angular.module('productsApp');
 
 (function () {
     angular.module('productsApp')
-        .controller('NavigationController', ["$scope", function ($scope) {
-            $scope.tab = 1;
 
-            $scope.selectTab = function (setTab) {
-                $scope.tab = setTab;
-            };
-
-            $scope.isSelected = function (checkTab) {
-                return $scope.tab === checkTab;
-            };
-        }])
-
-        .controller('ProductsController', ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
-           //pagination
+        .controller('ProductsController', ["$scope", "$http", function ($scope, $http) {
             $scope.currentPage = 0;
             $scope.itemsPerPage = 50;
             $scope.orderKey = undefined;
@@ -83,7 +71,7 @@ angular.module('productsApp', ['ngRoute']);
                     else {
                         $scope.currentPage = 0;
                     }
-                     return Math.ceil($scope.fliteredData.length / $scope.itemsPerPage);
+                    return Math.ceil($scope.fliteredData.length / $scope.itemsPerPage);
                 } else {
                     return Math.ceil($scope.items.length / $scope.itemsPerPage);
                 }
