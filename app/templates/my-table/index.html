@@ -1,7 +1,7 @@
 <section class="col-xs-9 content">
         <table class="content-table table table-bordered">
             <tr class="content-table__headings" >
-                <th class="content-table__heading" ng-click = "order(key,value)"
+                <th class="content-table__heading" ng-click = "sortBy(key)"
                     ng-repeat="(key,value) in tableStructure">{{value}}</th>
             </tr>
             <tr ng-repeat="item in items | filter: searchText|startFrom: startingItem()| limitTo: itemsPerPage as fliteredData">
@@ -20,3 +20,6 @@
 
 
 
+<!--
+filter: searchText|startFrom: startingItem()| limitTo: itemsPerPage-->
+<!--|orderBy:propertyName:reverse |-->
