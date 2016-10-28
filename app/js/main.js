@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('productsApp');
+angular.module('productsApp', []);
 
 (function () {
     angular.module('productsApp').controller('ProductsController', ["$scope", "$http", function ($scope, $http) {
@@ -97,3 +97,9 @@ angular.module('productsApp');
         };
     });
 })();
+angular.module('productsApp').filter('startFrom', function () {
+    return function (input, start) {
+        start = +start;
+        return input.slice(start);
+    };
+});

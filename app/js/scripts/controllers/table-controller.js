@@ -1,5 +1,5 @@
 'use strict';
-angular.module('productsApp');
+angular.module('productsApp',[]);
 
 (function () {
     angular.module('productsApp')
