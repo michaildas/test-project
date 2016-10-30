@@ -9,7 +9,7 @@ app.directive("myTable", [
         },
         link: function(scope) {
             scope.currentPage = 0;
-            scope.itemsPerPage = 15;
+            scope.itemsPerPage = 50;
             scope.items = scope.tableData;
             scope.propertyName = "id";
             scope.property = "0";
@@ -22,13 +22,9 @@ app.directive("myTable", [
                 scope.property = property;
             };
 
-            scope.firstPage = function() {
-                return scope.currentPage <= 0;
-            };
             scope.lastPage = function() {
-                let inputValue = scope.searchText;
                 let lastPageNum;
-                if (inputValue != undefined && inputValue != "" ) {
+                if (scope.searchText != undefined && scope.searchText != "" ) {
                     lastPageNum = Math.ceil(scope.fliteredData.length / scope.itemsPerPage - 1);
                 } else {
                     lastPageNum = Math.ceil(scope.items.length / scope.itemsPerPage - 1);
@@ -51,16 +47,6 @@ app.directive("myTable", [
                 } else {
                     return Math.ceil(scope.items.length / scope.itemsPerPage);
                 }
-            };
-
-            scope.startingItem = function() {
-                return scope.currentPage * scope.itemsPerPage;
-            };
-            scope.pageBack = function() {
-                scope.currentPage = scope.currentPage - 1;
-            };
-            scope.pageForward = function() {
-                scope.currentPage = scope.currentPage + 1;
             };
         }
     }

@@ -1,6 +1,5 @@
 app.factory("GetTableData", ["$http", "$q", function ($http, $q) {
 
-
     function get() {
         var q = $q.defer();
 
@@ -11,7 +10,6 @@ app.factory("GetTableData", ["$http", "$q", function ($http, $q) {
 
         return q.promise;
     }
-
 
     return {
         get: get
