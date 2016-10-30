@@ -8,14 +8,13 @@ app.directive("myTable", [
             tableStructure: "="
         },
         link: function(scope) {
-            console.log(scope.tableData);
             scope.currentPage = 0;
             scope.itemsPerPage = 15;
             scope.items = scope.tableData;
             scope.propertyName = "id";
             scope.property = "0";
             scope.reverse = true;
-            scope.structureKeys = Object.keys(scope.tableData);
+            scope.tableStructureKeys = Object.keys(scope.tableStructure);
             scope.sortBy = function(property) {
                 scope.propertyName = scope.tableStructureKeys[property];
                 property = property.toString();
@@ -27,7 +26,7 @@ app.directive("myTable", [
                 return scope.currentPage <= 0;
             };
             scope.lastPage = function() {
-                let inputValue = angular.element(document.querySelector (".search__input")).val();
+                let inputValue = scope.searchText;
                 let lastPageNum;
                 if (inputValue != undefined && inputValue != "" ) {
                     lastPageNum = Math.ceil(scope.fliteredData.length / scope.itemsPerPage - 1);
